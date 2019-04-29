@@ -28,29 +28,18 @@ button.on("click", eventHandler);
 
 function eventHandler() {
     d3.event.preventDefault();
-    // inputData = d3.selectAll(".form-control").node().value;
+    inputDate = d3.select(".form-control").node().value;
     // inputDate = d3.select(".form-control").property('value');
-    var x = document.getElementsByTagName('input');
-    inputData=[]
-    for (var i=0; i<x.length; i++) {
-        inputData.push(x[i].value);
-    }
-    console.log(inputData); 
-
+    console.log(inputDate);
     tbody.html("")
-
-    filteredData = tableData.filter(data=> 
-        (data.datetime === inputData[0]) || (data.city===inputData[1]) || (data.state===inputData[2]) ||
-            (data.country === inputData[3]) || (data.shape === inputData[4])
-        )
-
-//     filteredData = tableData.filter(data=> data.datetime === inputDate);
+    filteredData = tableData.filter(data=> data.datetime === inputDate);
     console.log(filteredData);
     if (Object.keys(filteredData).length === 0) {
-        tbody.html("<tr><td>All of Search Parameters out of range</td></tr>");
+        tbody.html("<tr><td>Date out of range [1/1/2010 - 1/13/2010]</td></tr>");
     } else {
     filteredData.forEach(data=> {
         var row = tbody.append('tr');
         Object.values(data).forEach(val=> row.append('td').text(val));
     })}; 
 }
+
